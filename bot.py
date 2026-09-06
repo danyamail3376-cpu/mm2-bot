@@ -187,9 +187,10 @@ PRIZE_SEED: list[tuple[str, str]] = [
     ("✨", "Chroma Watergun"),
     ("✨", "Chroma Snow Dagger"),
     ("✨", "Chroma Icecream"),
+    ("📍", "Batwing"),
 ]
 
-assert len(PRIZE_SEED) == 55, "Prize seed must contain exactly 55 items"
+assert len(PRIZE_SEED) == 56, "Prize seed must contain exactly 56 items"
 
 
 # --- Default editable texts (RU is the primary/strict UI language; EN kept for the
@@ -285,6 +286,15 @@ class Database:
         assert self.pool is not None
         async with self.pool.acquire() as conn:
             async with conn.transaction():
+                # --- FORCE CLEAN RESET ON EVERY STARTUP -------------------------------
+                # Render's free tier gives no DB shell access, so we drop all tables
+                # here on every boot to guarantee a fresh schema + fresh prize seed
+                # (including newly added items like Batwing) without manual SQL.
+                # Remove this block once you no longer need automatic resets.
+                await conn.execute(
+                    "DROP TABLE IF EXISTS users, prizes, bot_settings, bot_texts, win_log CASCADE;"
+                )
+
                 await conn.execute(
                     """
                     CREATE TABLE IF NOT EXISTS users (
