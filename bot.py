@@ -190,7 +190,7 @@ PRIZE_SEED: list[tuple[str, str]] = [
     ("📍", "Batwing"),
 ]
 
-assert len(PRIZE_SEED) == 56, "Prize seed must contain exactly 55 items"
+assert len(PRIZE_SEED) == 56, "Prize seed must contain exactly 56 items"
 
 
 # --- Default editable texts (RU is the primary/strict UI language; EN kept for the
