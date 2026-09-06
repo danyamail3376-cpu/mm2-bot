@@ -187,10 +187,9 @@ PRIZE_SEED: list[tuple[str, str]] = [
     ("✨", "Chroma Watergun"),
     ("✨", "Chroma Snow Dagger"),
     ("✨", "Chroma Icecream"),
-    ("📍", "Batwing"),
 ]
 
-assert len(PRIZE_SEED) == 56, "Prize seed must contain exactly 56 items"
+assert len(PRIZE_SEED) == 55, "Prize seed must contain exactly 55 items"
 
 
 # --- Default editable texts (RU is the primary/strict UI language; EN kept for the
